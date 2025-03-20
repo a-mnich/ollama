@@ -42,6 +42,7 @@ SolidCompression=no
 WizardStyle=modern
 ChangesEnvironment=yes
 OutputDir=..\dist\
+StartAfterInstall = {param:StartAfterInstall|true}
 
 ; Disable logging once everything's battle tested
 ; Filename will be %TEMP%\Setup Log*.txt
@@ -111,7 +112,8 @@ Name: "{userprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFile
 #if DirExists("..\dist\windows-arm64")
 Filename: "{tmp}\vc_redist.arm64.exe"; Parameters: "/install /passive /norestart"; Check: IsArm64() and vc_redist_needed(); StatusMsg: "Installing VC++ Redistributables..."; Flags: waituntilterminated
 #endif
-Filename: "{cmd}"; Parameters: "/C set PATH={app};%PATH% & ""{app}\{#MyAppExeName}"""; Flags: postinstall nowait runhidden
+Filename: "{cmd}"; Parameters: "/C set PATH={app};%PATH%"; Flags: postinstall nowait runhidden
+Filename: "{cmd}"; Parameters: "{app}\{#MyAppExeName}"; Flags: postinstall nowait runhidden; Check: StartAfterInstall = true
 
 [UninstallRun]
 ; Filename: "{cmd}"; Parameters: "/C ""taskkill /im ''{#MyAppExeName}'' /f /t"; Flags: runhidden

@@ -30,6 +30,13 @@ To install the Ollama application in a location different than your home directo
 OllamaSetup.exe /DIR="d:\some\location"
 ```
 
+### Do not start after installation
+To disable the startup after installation following flag can be supplied.  
+**Note:** This does not change the autostart option.
+```powershell
+OllamaSetup.exe /StartAfterInstall=false
+```
+
 ### Changing Model Location
 
 To change where Ollama stores the downloaded models instead of using your home directory, set the environment variable `OLLAMA_MODELS` in your user account.
